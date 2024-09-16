@@ -1,0 +1,23 @@
+name: Contagem usuários online
+type: any
+index: apm-*
+filter:
+  - query:
+      query_string:
+        query: "online_users:[5 TO *]"
+realert:
+  seconds: 30
+alert_text: |
+  -------------  ALERT -------------
+  A quantidade de usuários tá maior que 5:
+    Timestamp: {0}
+    Quantidade de usuários online: {1}
+
+alert_text_args: ["@timestamp", "online_users"]
+alert:
+  - "slack"
+slack_webhook_url: "https://hooks.slack.com/services/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"
+slack_channel_override: "#aula-de-observabilidade"
+slack_msg_color: "warning"
+slack_parse_override: "none"
+slack_username_override: "elastalert"

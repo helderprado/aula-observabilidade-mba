@@ -30,7 +30,7 @@ services:
     restart: always
     # define a network docker que o container fará parte
     networks: 
-      - observability
+      - observabilidade
     # define dependências para garantir que o serviço db esteja disponível antes do backend iniciar
     depends_on:
       - db
@@ -54,7 +54,7 @@ services:
     command: npm run dev
     # define a network docker que o container fará parte
     networks: 
-      - observability
+      - observabilidade
 
   # nome do serviço NGINX
   nginx:
@@ -67,7 +67,7 @@ services:
       - "9000:80"
     # define a network docker que o container fará parte
     networks: 
-      - observability
+      - observabilidade
 
   # nome do serviço do banco de dados
   db:
@@ -96,7 +96,7 @@ services:
       retries: 3     # número de tentativas antes de marcar o container como não saudável
     # define a network docker que o container fará parte
     networks:
-      - observability
+      - observabilidade
 
 # volumes docker a serem criados
 volumes:
@@ -107,6 +107,6 @@ volumes:
 
 # declaração da network docker
 networks:
-  # nome da network "observability", que deve existir externamente
-  observability:
+  # nome da network "observabilidade", que deve existir externamente
+  observabilidade:
     external: true

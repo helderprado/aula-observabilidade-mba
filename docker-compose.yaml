@@ -22,7 +22,7 @@ services:  # Define os serviços que serão executados
     ports:
       - 9200:9200  # Mapeia a porta 9200 do container para a porta 9200 da máquina host (acesso ao Elasticsearch)
     networks: 
-      - observability  # Define a rede para comunicação com outros serviços
+      - observabilidade  # Define a rede para comunicação com outros serviços
 
   kibana:
     image: docker.elastic.co/kibana/kibana:7.13.0  # Imagem do Kibana
@@ -33,7 +33,7 @@ services:  # Define os serviços que serão executados
       ELASTICSEARCH_URL: http://elasticsearch:9200  # URL do Elasticsearch
       ELASTICSEARCH_HOSTS: '["http://elasticsearch:9200"]'  # Lista de hosts do Elasticsearch
     networks: 
-      - observability  # Usa a mesma rede para comunicação com o Elasticsearch
+      - observabilidade  # Usa a mesma rede para comunicação com o Elasticsearch
 
   metricbeat:
     image: docker.elastic.co/beats/metricbeat:7.13.0  # Imagem do Metricbeat para monitoramento de métricas
@@ -44,7 +44,7 @@ services:  # Define os serviços que serão executados
       - ./beats/metric/metricbeat.yml:/usr/share/metricbeat/metricbeat.yml  # Arquivo de configuração do Metricbeat
     restart: on-failure  # Reinicia o container em caso de falha
     networks: 
-      - observability  # Usa a rede "observability"
+      - observabilidade  # Usa a rede "observabilidade"
 
   heartbeat:
     image: docker.elastic.co/beats/heartbeat:7.13.0  # Imagem do Heartbeat para monitoramento de uptime
@@ -55,7 +55,7 @@ services:  # Define os serviços que serão executados
     environment: 
       - setup.kibana.host=kibana:5601  # Define o Kibana como host para o setup do Heartbeat
     networks: 
-      - observability  # Usa a rede "observability"
+      - observabilidade  # Usa a rede "observabilidade"
 
   apm:
     image: docker.elastic.co/apm/apm-server-oss:7.13.0  # Imagem do APM Server para monitoramento de performance
@@ -67,7 +67,7 @@ services:  # Define os serviços que serão executados
       - "8200:8200"  # Mapeia a porta 8200 para o APM server
     restart: on-failure  # Reinicia o container em caso de falha
     networks: 
-      - observability  # Usa a rede "observability"
+      - observabilidade  # Usa a rede "observabilidade"
 
   elastalert:
     image: jertel/elastalert2  # Imagem do ElastAlert para alertas baseados em dados do Elasticsearch
@@ -79,8 +79,8 @@ services:  # Define os serviços que serão executados
       - elasticsearch  # Define dependência do serviço Elasticsearch
     restart: on-failure  # Reinicia o container em caso de falha
     networks:
-      - observability  # Usa a rede "observability"
+      - observabilidade  # Usa a rede "observabilidade"
 
 networks:
-  observability:
-    external: true  # Usa uma rede externa chamada "observability" para que todos os serviços possam se comunicar
+  obobservabilidade:
+    external: true  # Usa uma rede externa chamada "observabilidade" para que todos os serviços possam se comunicar
